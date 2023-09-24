@@ -1,5 +1,5 @@
 /*  #TODO implement word list x
-    #TODO win/lose condition
+    #TODO win/lose condition x
     #TODO sex it up a bit
     #TODO colour used lettersx
 
@@ -10,7 +10,8 @@ var guess =1;
 var guess1 = [];
 var targetChar;
 var guessChar;
-
+var enteredWord = [];
+var guessWord;
 var correctLetters= [];
 var usedLetters = [];
 var notLetters = [];
@@ -36,11 +37,11 @@ for (let letter of "QWERTYUIOPASDFGHJKLZXCVBNM"){
     })
 }
 
-var enteredWord = [];
+
 var random = Math.floor((Math.random()*wordList.length)+1);
 var word = wordList[random].toLowerCase();
 var letters = [];
-
+alert(word);
 for(var j=0;j<6;j++){
     letters[j]=word.charAt(j);
     
@@ -53,15 +54,18 @@ function clicker(){
 
 function text(id){
     if(count<6){
+    const sourceBox = document.querySelector(id).innerHTML
     document.querySelector("#box" + count).innerHTML = document.querySelector(id).innerHTML
-    enteredWord[count-1] = document.querySelector(id).innerHTML
-    count++
+    // const letterBoy = document.querySelector(id).innerHTML;
+    enteredWord.push(sourceBox.trim());
+    
+    count++;
     }
 }
 
 function deleter(){
     document.querySelector("#box" + (count-1)).innerHTML =""
-    enteredWord[count] = "";
+    enteredWord.pop();
     count--
 
 }
@@ -79,65 +83,84 @@ function enter() {
     // alert(letters);
     // alert(count);
     // alert(guess);
-    if(guess===1){
-        addition=5;
-    }else if(guess===2){
-        addition=10;
-    }else if(guess===3){
-        addition=15;
-    }else if(guess===4){
-        addition=20;
-    }else if(guess===5){
-        addition=25;
-    }
+    guessWord = enteredWord.join('').toUpperCase();
+    if(wordList.includes(guessWord)){
+
+        if(guess===1){
+            addition=5;
+        }else if(guess===2){
+            addition=10;
+        }else if(guess===3){
+            addition=15;
+        }else if(guess===4){
+            addition=20;
+        }else if(guess===5){
+            addition=25;
+        }
     
-    correctLetters = [];
-    for (let i = 1; i < 6; i++) {
-        const sourceBox = document.querySelector("#box" + (i)).innerHTML;
-        document.querySelector("#box" + (i + addition)).innerHTML = sourceBox;
-        guess1[i-1] = sourceBox;
-        // alert(sourceBox);
-        // alert(letters[i-1]);
-        guessChar = sourceBox.trim();
-        targetChar = letters[i-1];
+        correctLetters = [];
+        for (let i = 1; i < 6; i++) {
+            const sourceBox = document.querySelector("#box" + (i)).innerHTML;
+            document.querySelector("#box" + (i + addition)).innerHTML = sourceBox;
+            guess1[i-1] = sourceBox;
+            // alert(sourceBox);
+            // alert(letters[i-1]);
+            guessChar = sourceBox.trim();
+            // alert(guessChar)
+            targetChar = letters[i-1];
         
-        document.querySelector("#box" + (i)).innerHTML="";
-        count--;
+            document.querySelector("#box" + (i)).innerHTML="";
+            count--;
         
-        if(letters[i-1]===guessChar){
-            document.querySelector("#box"+(i+addition)).style.backgroundColor = "green";
+            if(letters[i-1]===guessChar){
+                document.querySelector("#box"+(i+addition)).style.backgroundColor = "green";
             
-            correctLetters.push(guessChar);
-            document.querySelector("#button"+guessChar.toUpperCase()).style.backgroundColor ="green";
+                correctLetters.push(guessChar);
+                document.querySelector("#button"+guessChar.toUpperCase()).style.backgroundColor ="green";
            
-        }
-        else if(letters.includes(guessChar)){
-            document.querySelector("#box"+(i+addition)).style.backgroundColor = "yellow";
-            usedLetters.push(guessChar);
-            document.querySelector("#button"+guessChar.toUpperCase()).style.backgroundColor ="yellow";
-        }
-        else{
-            document.querySelector("#box"+(i+addition)).style.backgroundColor = "grey";
-            notLetters.push(guessChar);
-            document.querySelector("#button"+guessChar.toUpperCase()).style.backgroundColor ="grey";
-        }
+            }
+            else if(letters.includes(guessChar)){
+                document.querySelector("#box"+(i+addition)).style.backgroundColor = "yellow";
+                usedLetters.push(guessChar);
+                document.querySelector("#button"+guessChar.toUpperCase()).style.backgroundColor ="yellow";
+            }
+            else{
+                document.querySelector("#box"+(i+addition)).style.backgroundColor = "grey";
+                notLetters.push(guessChar);
+                document.querySelector("#button"+guessChar.toUpperCase()).style.backgroundColor ="grey";
+            }
         
         
         
-    };
-    alert(correctLetters);
-     if(correctLetters.length===5){
-        alert("Congratulations you got the right answer in " + guess + " guesses!");
-        location.reload();
-     }  
-    guess++;
-    if(guess===6){
-        alert("You lose, the answer was "+ word);
-        location.reload();
-    }
-// }else{
-//     alert("Not a word!")
+        };
+        // alert(word);
+        // alert(correctLetters);
+        // alert(enteredWord);
+    
+        // alert(guessWord);
+        enteredWord=[];
+        if(correctLetters.length===5){
+            alert("Congratulations you got the right answer in " + guess + " guesses!");
+            location.reload();
+        }  
+        guess++;
+        if(guess===6){
+            alert("You lose, the answer was "+ word);
+            location.reload();
+        }
+}else{
+    // alert(word);
+    // alert(correctLetters);
+    // alert(enteredWord);
+    
+    // alert(guessWord);
+    alert("Not a word!");
+    deleter();
+    deleter();
+    deleter();
+    deleter();
+    deleter();
 }
 
 
-
+}
