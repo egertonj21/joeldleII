@@ -96,6 +96,8 @@ function enter() {
             addition=20;
         }else if(guess===5){
             addition=25;
+        }else if(guess===6){
+            addition=30;
         }
     
         correctLetters = [];
@@ -144,7 +146,7 @@ function enter() {
             location.reload();
         }  
         guess++;
-        if(guess===6){
+        if(guess===7){
             alert("You lose, the answer was "+ word);
             location.reload();
         }
