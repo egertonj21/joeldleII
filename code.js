@@ -10,6 +10,7 @@ var guess =1;
 var guess1 = [];
 var targetChar;
 var guessChar;
+
 var correctLetters= [];
 var usedLetters = [];
 var notLetters = [];
@@ -66,6 +67,14 @@ function deleter(){
 }
 
 function enter() {
+    // alert(guessWord);
+    // let guessWord = enteredWord.join('');
+    // guessWord = guessWord.toUpperCase();
+    // guessWord = guessWord.trim();
+    // alert(enteredWord);
+    // alert(guessWord);
+    
+    // wordList.includes(guessWord)){
     // alert(enteredWord);
     // alert(letters);
     // alert(count);
@@ -126,6 +135,9 @@ function enter() {
         alert("You lose, the answer was "+ word);
         location.reload();
     }
+// }else{
+//     alert("Not a word!")
 }
+
 
 
