@@ -1,8 +1,20 @@
+/*  #TODO implement word list 
+    #TODO win/lose condition
+    #TODO sex it up a bit
+    #TODO colour used lettersx
+
+*/
+
+
+
+
 var count = 1;
 var guess =1;
 var guess1 = [];
 var targetChar;
 var guessChar;
+var correctLetters= [];
+var usedLetters = [];
 
 document.querySelector("#buttonDel").addEventListener("click", deleter);
 document.querySelector("#buttonEnter").addEventListener("click", enter);
@@ -65,18 +77,22 @@ function enter() {
         document.querySelector("#box" + (i)).innerHTML="";
         count--;
         
-        if(guess1[i-1].includes(letters[i-1])){
+        if(letters[i-1]===guessChar){
             document.querySelector("#box"+(i+addition)).style.backgroundColor = "green";
+            correctLetters.push(guessChar);
+            document.querySelector("#button"+guessChar.toUpperCase()).style.backgroundColor ="green";
+           
         }
         else if(letters.includes(guessChar)){
             document.querySelector("#box"+(i+addition)).style.backgroundColor = "yellow";
+            usedLetters.push(guessChar);
+            document.querySelector("#button"+guessChar.toUpperCase()).style.backgroundColor ="yellow";
         }
         
+        
+        
     };
-    // alert("helpme")
-    // alert(guess1)
-    // alert(letters)
-    // alert(letters + guess1)
+       
     guess++;
 }
 
