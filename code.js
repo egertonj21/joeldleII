@@ -47,6 +47,7 @@ function keyInput(event){
     if(count<6){
         document.querySelector("#box" + count).innerHTML = event.key;
         enteredWord.push(event.key);
+        // buttonSelect(event.key);
         count++;    
     }
 }
@@ -78,6 +79,7 @@ function text(id){
         document.querySelector("#box" + count).innerHTML = document.querySelector(id).innerHTML
         // const letterBoy = document.querySelector(id).innerHTML;
         enteredWord.push(sourceBox.trim());
+        // buttonSelect(sourceBox);
         count++;
     }
 }
@@ -87,6 +89,14 @@ function deleter(){
     enteredWord.pop();
     count--
 
+}
+
+function buttonSelect(currentKey){
+    var activeButton = document.querySelector("#box"+currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");
+    })
 }
 
 function enter() {
