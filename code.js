@@ -1,7 +1,8 @@
-/*  #TODO implement word list x
-    #TODO win/lose condition x
+/*  
     #TODO sex it up a bit
-    #TODO colour used lettersx
+    #TODO get backspace to work!
+    #TODO stop not letters from appearing!
+    #TODO switch statement instead of unwield if else chain
 
 */
 
@@ -29,7 +30,26 @@ var wordList =['CIGAR', 'REBUT', 'SISSY', 'HUMPH', 'AWAKE', 'BLUSH', 'FOCAL', 'E
 
 document.querySelector("#buttonDel").addEventListener("click", deleter);
 document.querySelector("#buttonEnter").addEventListener("click", enter);
+document.addEventListener("keydown", keyInput);
+document.addEventListener("keyup", function(event) {
+    if (event.key === "Enter" || event.keyCode === 13) {
+        enter();
+    }
+});
 
+document.addEventListener("keyup", function(event) {
+    if (event.key === "Backspace" || event.keyCode === 8) {
+        deleter();
+    }
+});
+
+function keyInput(event){
+    if(count<6){
+        document.querySelector("#box" + count).innerHTML = event.key;
+        enteredWord.push(event.key);
+        count++;    
+    }
+}
 
 for (let letter of "QWERTYUIOPASDFGHJKLZXCVBNM"){
     document.querySelector("#button" + letter).addEventListener("click", function(){
@@ -54,12 +74,11 @@ function clicker(){
 
 function text(id){
     if(count<6){
-    const sourceBox = document.querySelector(id).innerHTML
-    document.querySelector("#box" + count).innerHTML = document.querySelector(id).innerHTML
-    // const letterBoy = document.querySelector(id).innerHTML;
-    enteredWord.push(sourceBox.trim());
-    
-    count++;
+        const sourceBox = document.querySelector(id).innerHTML
+        document.querySelector("#box" + count).innerHTML = document.querySelector(id).innerHTML
+        // const letterBoy = document.querySelector(id).innerHTML;
+        enteredWord.push(sourceBox.trim());
+        count++;
     }
 }
 
