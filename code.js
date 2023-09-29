@@ -30,6 +30,7 @@ var wordList =['CIGAR', 'REBUT', 'SISSY', 'HUMPH', 'AWAKE', 'BLUSH', 'FOCAL', 'E
 
 document.querySelector("#buttonDel").addEventListener("click", deleter);
 document.querySelector("#buttonEnter").addEventListener("click", enter);
+document.querySelector("#reset").addEventListener("click", reset);
 document.addEventListener("keydown", keyInput);
 document.addEventListener("keyup", function(event) {
     if (event.key === "Enter" || event.keyCode === 13) {
@@ -42,6 +43,10 @@ document.addEventListener("keyup", function(event) {
         deleter();
     }
 });
+
+function reset(){
+    location.reload();
+}
 
 function keyInput(event){
     if (count < 6 && /^[a-zA-Z]$/.test(event.key)) {
@@ -173,12 +178,12 @@ function enter() {
         enteredWord=[];
         if(correctLetters.length===5){
             alert("Congratulations you got the right answer in " + guess + " guesses!");
-            location.reload();
+            
         }  
         guess++;
         if(guess===7){
             alert("You lose, the answer was "+ word);
-            location.reload();
+            
         }
 }else{
     // alert(word);
