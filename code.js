@@ -44,13 +44,14 @@ document.addEventListener("keyup", function(event) {
 });
 
 function keyInput(event){
-    if(count<6){
+    if (count < 6 && /^[a-zA-Z]$/.test(event.key)) {
         document.querySelector("#box" + count).innerHTML = event.key;
         enteredWord.push(event.key);
-        // buttonSelect(event.key);
-        count++;    
+        count++;
+        // Call buttonSelect with the keyPressed if needed
+        // buttonSelect(keyPressed);
+      }
     }
-}
 
 for (let letter of "QWERTYUIOPASDFGHJKLZXCVBNM"){
     document.querySelector("#button" + letter).addEventListener("click", function(){
@@ -62,7 +63,7 @@ for (let letter of "QWERTYUIOPASDFGHJKLZXCVBNM"){
 var random = Math.floor((Math.random()*wordList.length)+1);
 var word = wordList[random].toLowerCase();
 var letters = [];
-alert(word);
+// alert(word);
 for(var j=0;j<6;j++){
     letters[j]=word.charAt(j);
     
